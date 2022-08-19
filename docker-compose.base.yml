@@ -1,0 +1,56 @@
+version: "3.3"
+services:
+  db:
+    volumes:
+      - ./data/db:/var/lib/postgresql/data
+    build:
+      dockerfile: dockerfile.db
+      context: ./install
+  backend:
+    build:
+      dockerfile: ../install/dockerfile.backend
+      context   : ./backend
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        window: 10s
+    volumes:
+      - ./data/media:/data/media
+    environment:
+      - IGNITE_API_ENDPOINT=http://ignite:1317
+    depends_on:
+      - db
+  frontend:
+    build:
+      dockerfile: ../install/dockerfile.frontend
+      context   : ./frontend
+    depends_on:
+      - backend
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+      - WDS_SOCKET_PORT=0
+  nginx:
+    build:
+      dockerfile: dockerfile.nginx
+      context: ./install/nginx
+    ports:
+      - "80:8080"
+      - "8000:8081"
+    depends_on:
+      - frontend
+    logging:
+      driver: none
+    environment:
+      - NGINX_FRONTEND_PORT=8080
+      - NGINX_BACKEND_PORT=8081
+  ignite:
+    build:
+      dockerfile: dockerfile.ignite
+      context: ./install
+    environment:
+      - HOME=/app
+    command: ignite chain serve
+    volumes:
+      - ./data/blc:/app/sdh
+      - ./blockchain:/app/chain

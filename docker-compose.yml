@@ -1,0 +1,38 @@
+version: "3.3"
+services:
+  db:
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+  backend:
+    build:
+      target: dev
+    command: sh -c "
+      python3 manage.py migrate &&
+      python3 manage.py runserver 0.0.0.0:8000"
+    volumes:
+      - ./backend:/app
+    environment :
+      - PRODUCTION=false
+      - DB_PASSWORD=postgres
+      - DB_USER=postgres
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DB_NAME=postgres
+      - DJANGO_SECRET_KEY=IYpRqqRoHfPEflPmxeDiDowRGOyIiTbSYYakxKtqLbStowKteX
+
+  frontend:
+    build:
+      target: dev
+    command: npm start
+    volumes:
+      - ./frontend:/app
+    environment:
+      - REACT_APP_API_ENDPOINT=http://localhost:8000
+      - DANGEROUSLY_DISABLE_HOST_CHECK=true
+  nginx:
+    environment:
+      - NGINX_HOST=localhost
+  ignite:
+
