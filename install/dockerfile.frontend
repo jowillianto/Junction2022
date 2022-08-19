@@ -1,0 +1,41 @@
+# Base for all subsequent builds
+FROM node:16.14 as base
+
+# Timezone=Asia/Seoul
+RUN apt-get update
+RUN DEBIAN_FRONTEND=noninteractive apt-get -y install tzdata
+RUN ln -sf /usr/share/zoneinfo/Asia/Seoul /etc/localtime
+
+WORKDIR /app
+ENV PATH /app/node_modules/.bin:$PATH
+# Copy requirements
+COPY ./package.json ./
+COPY ./package-lock.json ./
+
+# Development build
+FROM base as dev
+WORKDIR /app
+RUN npm install --force --silent
+RUN mkdir -p node_modules/.cache && chmod -R 777 node_modules/.cache
+
+# Base for production build
+FROM base as prod-base
+WORKDIR /app
+RUN npm install --force --silent --production
+RUN mkdir -p /app/node_modules/.cache && chmod -R 777 /app/node_modules/.cache
+COPY . .
+ARG REACT_APP_API_ENDPOINT
+ENV REACT_APP_API_ENDPOINT $REACT_APP_API_ENDPOINT
+ARG REACT_APP_JWT_SECRET
+ENV REACT_APP_JWT_SECRET $REACT_APP_JWT_SECRET
+ARG REACT_APP_WS_ENDPOINT
+ENV REACT_APP_WS_ENDPOINT $REACT_APP_WS_ENDPOINT
+RUN npm run build
+
+# Production build
+FROM node:16.14-slim as prod
+ENV PATH /app/node_modules/.bin:$PATH
+# Install the webserver
+COPY --from=prod-base /app/build /app/build
+RUN npm install -g serve
+WORKDIR /app

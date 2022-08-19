@@ -1,0 +1,28 @@
+FROM golang:1.19-bullseye as base
+
+# Set timezone
+# Timezone=Asia/Seoul
+RUN apt-get update
+RUN DEBIAN_FRONTEND=noninteractive apt-get -y install tzdata
+RUN ln -sf /usr/share/zoneinfo/Asia/Seoul /etc/localtime
+
+# Install dependencies
+RUN apt-get update && apt-get install -y\
+  curl \
+  build-essential \
+  ca-certificates \
+  curl 
+
+# Install ignite
+WORKDIR /app
+RUN curl https://get.ignite.com/cli! -o ./ignite.sh
+RUN bash ignite.sh
+RUN rm ignite.sh
+
+# Make the folder
+ARG HOME
+ENV HOME ${HOME}
+RUN mkdir ${HOME}/sdh
+
+# Final work directory
+WORKDIR /app/chain

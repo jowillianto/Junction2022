@@ -1,0 +1,5 @@
+FROM postgres:14-alpine
+
+# Timezone=Asia/Seoul
+RUN apk add tzdata
+RUN ln -sf /usr/share/zoneinfo/Asia/Seoul /etc/localtime

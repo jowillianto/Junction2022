@@ -1,0 +1,36 @@
+server { # simple reverse-proxy
+  listen       ${NGINX_FRONTEND_PORT};
+  server_name  ${NGINX_HOST};
+  #access_log   logs/domain2.access.log  main;
+
+  # serve static files
+  # location ~ ^/(images|javascript|js|css|flash|media|static)/  {
+  # root    /var/www/virtual/big.server.com/htdocs;
+  # expires 30d;
+  #}
+
+  # pass requests for dynamic content to rails/turbogears/zope, et al
+  # Max File Size
+  client_max_body_size 100M;
+  location / {
+    proxy_pass      http://frontend:3000;
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header Upgrade $http_upgrade;
+    proxy_set_header Connection "Upgrade";
+  }
+}
+server {
+  listen ${NGINX_BACKEND_PORT};
+  server_name ${NGINX_HOST};
+  client_max_body_size 100M;
+  location / {
+    proxy_pass http://backend:8000;
+    proxy_set_header HOST $host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header Upgrade $http_upgrade;
+    proxy_set_header Connection "Upgrade";
+  }
+}
