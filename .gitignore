@@ -1,0 +1,22 @@
+# VSCode config
+**/.vscode/
+
+# Pharmaco-net settings
+data/
+#data/db
+#data/db_dev
+#data/users
+__pycache__/
+__pycache__/*
+*.pyc
+#secret/
+env/
+venv/
+pyenv/
+virtualenv/
+
+# Testing script
+_test*.*
+
+# SSL settings
+install/nginx/ssl_config/
