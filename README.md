@@ -1,4 +1,4 @@
-# NGO App
+# ChaiNGO
 ## Clone this Repo
 ```
   git clone https://jowillianto/Junction2022
