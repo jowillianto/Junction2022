@@ -43,7 +43,9 @@ export default class Routing extends React.Component{
         <React.Suspense fallback = {<Loading />}>
           <Navbar isLoggedIn = {this.state.isLoggedIn}/>
           <Routes>
-            <Route path = '/' element = {<Home />} />
+            <Route path = '/' element = {<Home 
+              user = {this.context.user}
+            />} />
             <Route path = '/login' element = {<Login 
               user = {this.context.user}
               setUser = {this.context.setUser}

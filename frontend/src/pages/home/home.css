@@ -1,0 +1,59 @@
+.homepage-left, .homepage-right{
+  display         : flex;
+  flex-flow       : column wrap;
+  justify-content : center;
+  min-height      : inherit;
+  align-items     : flex-start;
+}
+.homepage-left{
+  padding         : 0 0 0 40%;
+}
+.homepage-right{
+  padding         : 0 40% 0 5%;
+  align-items     : flex-end;
+}
+.homepage-left>div{
+  width           : 80%;
+}
+.homepage-left .today-donation{
+  background-color: #c3c3c3;
+  padding         : 2em;
+}
+.homepage-left .today-donation .bold{
+  font-weight     : 900;
+}
+.private-home-button, .public-home-button{
+  display   : flex;
+  flex-flow : row wrap;
+  justify-content: left;
+}
+.private-home-button a{
+  margin-right  : 1em;
+  width         : 10vw;
+  text-align    : center;
+  padding       : 1em 2em;
+}
+.private-home-button .button-left a{
+  background-color: #c3c3c3;
+  border          : 1px solid black;
+}
+
+.homepage-right .ngo-list{
+  display   : flex;
+  flex-flow : column wrap;
+  width     : 25vw;
+  margin-bottom: 1em;
+}
+.homepage-right .ngo-top{
+  margin-bottom: 1em;
+}
+
+.homepage-right .ngo-bottom{
+  display   : flex;
+  flex-flow : row wrap;
+  justify-content: space-between;
+}
+.homepage-right .ngo-bottom>div{
+  width     : 48%;
+
+}
