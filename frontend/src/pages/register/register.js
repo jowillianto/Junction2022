@@ -1,5 +1,6 @@
 import React from 'react'
 import User from '../../API/user'
+import { UserContext } from '../../routes/utils'
 import './register.css'
 
 class RegisterLeft extends React.Component{
@@ -17,6 +18,7 @@ class RegisterLeft extends React.Component{
 
 
 class RegisterForm extends React.Component{
+  static contextType  = UserContext
   constructor(props){
     super(props)
     this.state  = {
@@ -96,13 +98,14 @@ class RegisterForm extends React.Component{
     )
   }
   submitRegister = () => {
-    User.register({
-      username  : this.state.form.username.value,
-      email     : this.state.form.email.value, 
-      password  : this.state.form.password.value  
-    })
+    User.register(
+      this.state.form.username.value,
+      this.state.form.email.value, 
+      this.state.form.password.value, 
+      'as'
+    )
     .then((user) => {
-      this.props.setUser(user)
+      this.context.setUser(user)
       window.location.href = '/'
     })
     .catch((err) => console.error(err))
