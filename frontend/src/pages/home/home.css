@@ -37,11 +37,13 @@
   background-color: #c3c3c3;
   border          : 1px solid black;
 }
-
+.homepage-right{
+  padding-top   : 3em;
+}
 .homepage-right .ngo-list{
   display   : flex;
   flex-flow : column wrap;
-  width     : 25vw;
+  width     : 35vw;
   margin-bottom: 1em;
 }
 .homepage-right .ngo-top{

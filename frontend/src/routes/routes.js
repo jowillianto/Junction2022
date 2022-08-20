@@ -17,7 +17,7 @@ const Donate      = React.lazy(() => import('../pages/donate/donate'))
 const Profile     = React.lazy(() => import('../pages/profile/profile'))
 const Transaction = React.lazy(() => import('../pages/transaction/transaction'))
 const Register    = React.lazy(() => import('../pages/register/register'))
-const NgoList     = React.lazy(() => import('../pages/donate/donate'))
+const NgoList     = React.lazy(() => import('../pages/ngo_list/ngo_list'))
 
 export default class Routing extends React.Component{
   static contextType   = UserContext
@@ -31,10 +31,13 @@ export default class Routing extends React.Component{
     this.updateLoggedIn()
   }
   updateLoggedIn = () => {
-    if(this.context.user != null){
+    if(this.context.user !== null){
       this.context.user.checkLogin()
       .then((resp) => this.setState({isLoggedIn : true}))
       .catch((rej) => this.setState({isLoggedIn : false}))
+    }
+    else{
+      this.setState({isLoggedIn : false})
     }
   }
   render(){
@@ -44,8 +47,9 @@ export default class Routing extends React.Component{
           <Navbar isLoggedIn = {this.state.isLoggedIn}/>
           <Routes>
             <Route path = '/' element = {<Home 
-              user = {this.context.user}
-            />} />
+              isLoggedIn = {this.state.isLoggedIn} 
+            />
+            } />
             <Route path = '/login' element = {<Login 
               user = {this.context.user}
               setUser = {this.context.setUser}

@@ -11,7 +11,7 @@ export default class Navbar extends React.Component{
       href  : '/', 
       name  : 'Home'
     }, {
-      href  : '/companies', 
+      href  : '/ngo-companies', 
       name  : 'NGO List'
     }]
   }
@@ -37,16 +37,28 @@ export default class Navbar extends React.Component{
     )
   }
   renderRight = () => {
-    return (
-      <div className = 'navbar-right'>
-        <div className = 'navbar-right-donate'>
-          <Link to = '/donate'>Donate</Link> 
+    if(this.props.isLoggedIn)
+      return (
+        <div className = 'navbar-right'>
+          <div className = 'navbar-right-donate'>
+            <Link to = '/donate'>Donate</Link> 
+          </div>
+          <div className = 'navbar-right-usr-icn'>
+            <Link to = '/profile'></Link>
+          </div>
         </div>
-        <div className = 'navbar-right-usr-icn'>
-          <Link to = '/profile'></Link>
+      )
+    else
+      return(
+        <div className = 'navbar-right'>
+          <div className = 'navbar-right-login'>
+            <Link to = '/login'>Login</Link> 
+          </div>
+          <div className = 'navbar-right-usr-icn'>
+            <Link to = '/register'>Register</Link>
+          </div>
         </div>
-      </div>
-    )
+      )
   }
   render(){
     return(

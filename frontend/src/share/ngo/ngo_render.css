@@ -3,10 +3,14 @@
   padding         : 1em;
 }
 
-.ngo-title{
+.ngo-obj-title{
   display         : flex;
   flex-flow       : row wrap;
   justify-content : space-between;
+  padding-right   : 10%;
+}
+.ngo-obj-desc{
+  padding-right   : 15%;
 }
 .ngo-title>span.ngo-obj-name{
   margin-right    : 1em;

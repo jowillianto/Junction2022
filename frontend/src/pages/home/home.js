@@ -49,14 +49,14 @@ class HomepageLeft extends React.Component{
     )
   }
   renderButtons(){
-    if(this.props.user === null){
+    if(!this.props.isLoggedIn){
       return (
         <div className = 'public-home-button'>
           <div className  = 'button-left'>
-            <Link to = '/donate'>Donate</Link>
+            <Link to = '/login'>Login</Link>
           </div>
           <div className  = 'button-right'>
-            <Link to = '/'>Learn more</Link>
+            <Link to = '/register'>Register</Link>
           </div>
         </div>
       )
