@@ -1,0 +1,12 @@
+.grid-cont{
+
+}
+.grid-bg-left{
+  position          : absolute;
+  left              : 0;
+  top               : 0;
+  background-color  : #D3D3D3;
+  width             : 50vw;
+  height            : 100vh;
+  z-index           : -1;
+}
