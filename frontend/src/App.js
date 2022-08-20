@@ -2,7 +2,6 @@ import React from "react";
 import { UserContext } from "./routes/utils";
 import User from "./API/user";
 import Routing from "./routes/routes";
-import runAll from "./experiment";
 
 export default class App extends React.Component {
   constructor(props) {
@@ -19,13 +18,9 @@ export default class App extends React.Component {
   setUser = (user: User) => {
     this.setUser({ user: user });
   };
-  handleButton = () => {
-    runAll();
-  };
   render = () => {
     return (
       <UserContext.Provider value={this.state}>
-        <button onClick={this.handleButton}>LAFDLJKSLK</button>
         <Routing />
       </UserContext.Provider>
     );
