@@ -1,0 +1,13 @@
+.ngo-obj{
+  background-color: #c3c3c3;
+  padding         : 1em;
+}
+
+.ngo-title{
+  display         : flex;
+  flex-flow       : row wrap;
+  justify-content : space-between;
+}
+.ngo-title>span.ngo-obj-name{
+  margin-right    : 1em;
+}
