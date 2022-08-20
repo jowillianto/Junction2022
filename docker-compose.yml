@@ -34,5 +34,3 @@ services:
   nginx:
     environment:
       - NGINX_HOST=localhost
-  ignite:
-
