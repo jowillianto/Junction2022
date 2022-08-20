@@ -22,5 +22,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('user/register', views.UserRegister.as_view()),
     path('user/login', views.UserLogin.as_view()),
-    path('ngo/', viewNGO.NGOList.as_view())
+    path('ngo/', viewNGO.NGOList.as_view()),
+    path('user/checklogin', views.UserCheckLogin.as_view())
 ]
