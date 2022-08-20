@@ -11,6 +11,7 @@ from rest_framework.serializers import ValidationError
 # Create your views here.
 
 class NGOList(APIView):
+    
     def queryset(self, request : Request) -> QuerySet:
         return NGO.objects.all()
     
