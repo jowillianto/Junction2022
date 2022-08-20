@@ -20,7 +20,7 @@ from ngo import views as viewNGO
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('user/signin', views.UserSignin.as_view()),
+    path('user/register', views.UserRegister.as_view()),
     path('user/login', views.UserLogin.as_view()),
     path('ngo/', viewNGO.NGOList.as_view())
 ]

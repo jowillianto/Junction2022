@@ -7,7 +7,7 @@ from .models import User
 
 # Create your views here.
 
-class UserSignin(APIView):
+class UserRegister(APIView):
     def post(self, request):
         data = request.data
         if User.objects.filter(username = data['username']).exists():
