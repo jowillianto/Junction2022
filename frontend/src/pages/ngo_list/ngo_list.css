@@ -1,0 +1,15 @@
+.ngo-set{
+	display 	: flex;
+	flex-flow : row wrap;
+	width 		: 90vw;
+	
+}
+.ngo-list{
+	margin 		: auto;
+	width 		: 90vw;
+}
+.ngo-set>div>div{
+	width 		: 40vw;
+	margin 		: 1em;
+	border-radius: 0.5em;
+}

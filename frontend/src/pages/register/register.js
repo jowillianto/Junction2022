@@ -1,4 +1,5 @@
 import React from 'react'
+import User from '../../API/user'
 import './register.css'
 
 class RegisterLeft extends React.Component{
@@ -94,10 +95,30 @@ class RegisterForm extends React.Component{
       </div>
     )
   }
+  submitRegister = () => {
+    User.register({
+      username  : this.state.form.username.value,
+      email     : this.state.form.email.value, 
+      password  : this.state.form.password.value  
+    })
+    .then((user) => {
+      this.props.setUser(user)
+      window.location.href = '/'
+    })
+    .catch((err) => console.error(err))
+  }
+  renderButton(){
+    return (
+      <div className = 'submit'>
+        <button onClick = {this.submitRegister}>Sign Up</button>
+      </div>
+    )
+  }
   render(){
     return(
       <div className = 'register-right'>
         {this.renderForm()}
+        {this.renderButton()}
       </div>
     )
   }
