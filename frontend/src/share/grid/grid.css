@@ -1,5 +1,5 @@
 .grid-bg-left{
-  background-color  : #a3a3a3;
+  background-color  : var(--color2);
   width             : 50vw;
   min-height        : 90vh;
 }

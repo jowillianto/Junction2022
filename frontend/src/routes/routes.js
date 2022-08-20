@@ -18,6 +18,7 @@ const Profile     = React.lazy(() => import('../pages/profile/profile'))
 const Transaction = React.lazy(() => import('../pages/transaction/transaction'))
 const Register    = React.lazy(() => import('../pages/register/register'))
 const NgoList     = React.lazy(() => import('../pages/ngo_list/ngo_list'))
+const NgoDetail   = React.lazy(() => import('../pages/ngo_detail/ngo_detail'))
 
 export default class Routing extends React.Component{
   static contextType   = UserContext
@@ -63,7 +64,14 @@ export default class Routing extends React.Component{
                 <Profile user = {this.context.user}/>
               </PrivateRoute>
             }/>
-            <Route path = '/ngo-companies' element = {<NgoList />}/>
+            <Route path = '/ngo-companies'>
+              <Route path = '/ngo-companies' element = {<NgoList />}/>
+              <Route path = '/ngo-companies/:ngoId' element = {
+                <NavigateParams>
+                  <NgoDetail />
+                </NavigateParams>
+              } />
+            </Route>
           </Routes>
         </React.Suspense >
       </Router>

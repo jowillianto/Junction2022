@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { NavigateParamsContext } from '../../routes/utils'
 import './navbar.css'
+import BlankAvatar from '../../assets/blank_avatar.png'
 
 export default class Navbar extends React.Component{
   static contextType = NavigateParamsContext
@@ -44,7 +45,9 @@ export default class Navbar extends React.Component{
             <Link to = '/donate'>Donate</Link> 
           </div>
           <div className = 'navbar-right-usr-icn'>
-            <Link to = '/profile'></Link>
+            <Link to = '/profile'>
+              <img src = {BlankAvatar} />
+            </Link>
           </div>
         </div>
       )
@@ -54,7 +57,7 @@ export default class Navbar extends React.Component{
           <div className = 'navbar-right-login'>
             <Link to = '/login'>Login</Link> 
           </div>
-          <div className = 'navbar-right-usr-icn'>
+          <div className = 'navbar-right-register'>
             <Link to = '/register'>Register</Link>
           </div>
         </div>

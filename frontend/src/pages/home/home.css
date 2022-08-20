@@ -6,7 +6,7 @@
   align-items     : flex-start;
 }
 .homepage-left{
-  padding         : 0 0 0 40%;
+  padding         : 0 0 0 15%;
 }
 .homepage-right{
   padding         : 0 40% 0 5%;
@@ -18,33 +18,56 @@
 .homepage-left .today-donation{
   background-color: #c3c3c3;
   padding         : 2em;
+  border-radius   : 1em;
+  margin-bottom   : 2em;
+}
+.homepage-left .today-donation .donate-title{
+  font-size       : 1.2em;
+}
+.homepage-left .today-donation .donate-amount{
+  font-size       : 1em;
 }
 .homepage-left .today-donation .bold{
   font-weight     : 900;
+}
+.homepage-left .home-title h1{
+  font-size       : 4em;
+  font-weight     : 900;
+  margin          : 0;
+  font-family     : 'ClashGrotesk-Bold'
 }
 .private-home-button, .public-home-button{
   display   : flex;
   flex-flow : row wrap;
   justify-content: left;
 }
-.private-home-button a{
+.private-home-button a, .public-home-button a{
   margin-right  : 1em;
   width         : 10vw;
   text-align    : center;
-  padding       : 1em 2em;
+  padding       : 1em 4em;
+  border-radius : 0.1em;
 }
-.private-home-button .button-left a{
-  background-color: #c3c3c3;
+.private-home-button .button-left a, 
+.public-home-button .button-left a, 
+.public-home-button .button-right a
+{
+  background-color: var(--color1);
   border          : 1px solid black;
 }
+
 .homepage-right{
   padding-top   : 3em;
 }
+.home-desc{
+  margin-bottom : 2em;
+}
+
 .homepage-right .ngo-list{
   display   : flex;
   flex-flow : column wrap;
   width     : 35vw;
-  margin-bottom: 1em;
+  margin-bottom: 2em;
 }
 .homepage-right .ngo-top{
   margin-bottom: 1em;
@@ -57,5 +80,11 @@
 }
 .homepage-right .ngo-bottom>div{
   width     : 48%;
+}
 
+.homepage-right .blc-title{
+  font-size       : 1.5em;
+  line-height     : 1.5;
+  font-family     : 'ClashGrotesk-Regular';
+  margin-bottom   : 0.5em;
 }

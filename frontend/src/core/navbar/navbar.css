@@ -3,7 +3,7 @@ nav{
   flex-flow : row wrap;
   justify-content: space-between;
   padding   : 0 15%;
-  background-color: red;
+  background-color: var(--color1);
   margin    : 0;
   position  : sticky;
   width     : calc(100% - 30%);
@@ -38,5 +38,22 @@ nav{
   flex-flow : row wrap;
   justify-content: right;
   align-items: center;
-  width     : 20%;
+  width     : 50%;
+}
+.navbar-right>div{
+  margin-left : 1em;
+}
+.navbar-right a{
+  border      : 1px black solid;
+  padding     : 1em 4em;
+}
+.navbar-right .navbar-right-usr-icn a{
+  border      : 0;
+  padding     : 0;
+}
+.navbar-right .navbar-right-usr-icn img{
+  height      : 6vh;
+  width       : 6vh;
+  border      : 0.2em black solid;
+  border-radius: 50%;
 }
