@@ -1,5 +1,6 @@
 import { AxiosResponse } from "axios";
 import { Endpoint, AuthEndpoint, UNIVERSAL_TOKEN } from "./base";
+import { generateKey } from "../experiment";
 
 export interface Transaction {
   to: string;
@@ -66,12 +67,12 @@ export default class User extends UserBase {
     let endpoint = new Endpoint("post", "user/login");
     return new Promise((res, rej) => {
       endpoint
-      .req(payload)
-      .then((resp) => {
-        UNIVERSAL_TOKEN.token = resp.data.token;
-        res(new User(resp.data.public_key));
-      })
-      .catch((err) => rej(err));
+        .req(payload)
+        .then((resp) => {
+          UNIVERSAL_TOKEN.token = resp.data.token;
+          res(new User(resp.data.public_key));
+        })
+        .catch((err) => rej(err));
     });
   };
   static register = (
@@ -88,13 +89,15 @@ export default class User extends UserBase {
     };
     let endpoint = new Endpoint("post", "user/register");
     return new Promise((res, rej) => {
-      endpoint
-        .req(payload)
-        .then((resp) => {
-          UNIVERSAL_TOKEN.token = resp.data.token;
-          res(new User(payload.public_key));
-        })
-        .catch((err) => rej(err));
+      generateKey().then((val) => {
+        endpoint
+          .req(payload)
+          .then((resp) => {
+            UNIVERSAL_TOKEN.token = resp.data.token;
+            res(new User(val));
+          })
+          .catch((err) => rej(err));
+      });
     });
   };
   static loadFromLocal = (): User => {
