@@ -22,6 +22,7 @@ ENV_VARS    = ENVParser()
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = ENV_VARS.django_secret
+# SECRET_KEY = "a"
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG      = ENV_VARS.debug
@@ -90,6 +91,13 @@ DATABASES = {
         'PORT'      : ENV_VARS.db_creds.get('DB_PORT', '5432')
     }
 }
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': 'mydatabase',
+#     }
+# }
+
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
@@ -135,4 +143,4 @@ MEDIA_ROOT = pathlib.Path(BASE_DIR).resolve()
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # BlockChain API Endpoint
-IGNITE_API_ENDPOINT = ENV_VARS.ignite['IGNITE_API_ENDPOINT']
+# IGNITE_API_ENDPOINT = ENV_VARS.ignite['IGNITE_API_ENDPOINT']
