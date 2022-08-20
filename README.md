@@ -1,4 +1,8 @@
 # NGO App
+## Clone this Repo
+```
+  git clone https://jowillianto/Junction2022
+```
 ## How to Run the Full Stack of Servers
 Up the whole stack with one line of command
 ```
