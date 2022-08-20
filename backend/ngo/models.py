@@ -9,3 +9,4 @@ class NGO(models.Model):
     description = models.TextField(default=None)
     avatar = models.ImageField(upload_to="avatar")
     staff = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
+    wallet = models.CharField(max_length=100, null=True)
