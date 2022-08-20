@@ -27,7 +27,7 @@ class InternalPrivateRoute extends React.Component{
         ...props, ...children.props, ...this.context
       })
     else {
-      return <Navigate to = {`/login/cont_to=${to}`} replace/>
+      return <Navigate to = {`/login`} replace/>
     }
   }
 }
