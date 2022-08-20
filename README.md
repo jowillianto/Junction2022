@@ -1,4 +1,6 @@
 # ChaiNGO
+ChaiNGO is a blockchain system to ensure the transparency of the NGOs to the donors
+
 ## Clone this Repo
 ```
   git clone https://jowillianto/Junction2022
