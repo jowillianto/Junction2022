@@ -1,6 +1,7 @@
 import React from 'react'
 import User from '../../API/user'
 import { UserContext } from '../../routes/utils'
+import { NavigateParamsContext } from '../../routes/utils'
 import './login.css'
 
 class LoginLeft extends React.Component{
@@ -79,22 +80,26 @@ class LoginForm extends React.Component{
       </div>
     )
   }
-  submitLogin = () => {
+  submitLogin = (navigate) => {
     User.login(
       this.state.form.email.value, 
       this.state.form.password.value
     )
     .then((user) => {
-      this.context.setUser(user)
-      window.location.href = '/'
+      this.context.setUser(user) 
+      navigate('/')
     })
     .catch((err) => console.error(err))
   }
   renderButton(){
     return(
-      <div className = 'submit'>
-        <button onClick = {this.submitLogin}>Login</button>
-      </div>
+      <NavigateParamsContext.Consumer>
+        {value => 
+          (<div className = 'submit'>
+            <button onClick = {() => this.submitLogin(value.navigate)}>Login</button>
+          </div>)
+        }
+      </NavigateParamsContext.Consumer>
     )
   }
   render(){

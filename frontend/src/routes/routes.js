@@ -28,18 +28,23 @@ export default class Routing extends React.Component{
       isLoggedIn  : null
     }
   }
+  updateLoggedIn = () => {
+    if(this.state.isLoggedIn !== true){
+      if(this.context.user !== null){
+        this.context.user.checkLogin()
+        .then((resp) => this.setState({isLoggedIn : true}))
+        .catch((rej) => this.setState({isLoggedIn : false}))
+      }
+      else{
+        this.setState({isLoggedIn : false})
+      }
+    }
+  }
   componentDidMount(){
     this.updateLoggedIn()
   }
-  updateLoggedIn = () => {
-    if(this.context.user !== null){
-      this.context.user.checkLogin()
-      .then((resp) => this.setState({isLoggedIn : true}))
-      .catch((rej) => this.setState({isLoggedIn : false}))
-    }
-    else{
-      this.setState({isLoggedIn : false})
-    }
+  componentDidUpdate(){
+    this.updateLoggedIn()
   }
   render(){
     return(
@@ -51,17 +56,40 @@ export default class Routing extends React.Component{
               isLoggedIn = {this.state.isLoggedIn}
             />
             } />
-            <Route path = '/login' element = {<Login 
-              user = {this.context.user}
-              setUser = {this.context.setUser}
-            />} />
-            <Route path = '/register' element = {<Register 
-              user = {this.context.user}
-              setUser = {this.context.setUser}
-            />} />
+            <Route path = '/login' element = {
+              <NavigateParams>
+                <Login 
+                  user = {this.context.user}
+                  setUser = {this.context.setUser}
+                />
+              </NavigateParams>
+            } />
+            <Route path = '/register' element = {
+              <NavigateParams>
+                <Register 
+                  user = {this.context.user}
+                  setUser = {this.context.setUser}
+                />
+              </NavigateParams>
+            } />
             <Route path = '/profile' element = {
-              <PrivateRoute to = '/profile'>
+              <PrivateRoute to = '/profile' login = {this.state.isLoggedIn}>
                 <Profile user = {this.context.user}/>
+              </PrivateRoute>
+            }/>
+            <Route path = '/donate' element = {
+              <PrivateRoute to = '/donate' login = {this.state.isLoggedIn}>
+                <Donate user = {this.context.user}/>
+              </PrivateRoute>
+            } />
+            <Route path = '/done' element = {
+              <PrivateRoute to = '/done' login = {this.state.isLoggedIn}>
+                <Done />
+              </PrivateRoute>
+            } />
+            <Route path = '/transaction' element = {
+              <PrivateRoute to = '/transaction' login = {this.state.isLoggedIn}>
+                <Transaction />
               </PrivateRoute>
             }/>
             <Route path = '/ngo-companies'>

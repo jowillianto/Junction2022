@@ -1,7 +1,7 @@
-import React from "react";
-import User from "../../API/user";
-import { UserContext } from "../../routes/utils";
-import "./register.css";
+import React from 'react'
+import User from '../../API/user'
+import { NavigateParams, UserContext } from '../../routes/utils'
+import './register.css'
 
 class RegisterLeft extends React.Component {
   constructor(props) {
@@ -92,24 +92,32 @@ class RegisterForm extends React.Component {
       </div>
     );
   }
-  submitRegister = () => {
+  submitRegister = (navigate) => {
     User.register(
       this.state.form.username.value,
       this.state.form.email.value,
       this.state.form.password.value
     )
-      .then((user) => {
-        this.context.setUser(user);
-        window.location.href = "/";
-      })
-      .catch((err) => console.error(err));
-  };
-  renderButton() {
+    .then((user) => {
+      this.context.setUser(user)
+      navigate('/')
+    })
+    .catch((err) => {
+      if(err.response && err.response.status === 400){
+        console.error(err)
+      }
+    })
+  }
+  renderButton(){
     return (
-      <div className="submit">
-        <button onClick={this.submitRegister}>Sign Up</button>
-      </div>
-    );
+      <NavigateParams.Consumer>
+        {value => 
+          (<div className = 'submit'>
+            <button onClick = {() => this.submitRegister(value.navigate)}>Sign Up</button>
+          </div>)
+        }
+      </NavigateParams.Consumer>
+    )
   }
   render() {
     return (
