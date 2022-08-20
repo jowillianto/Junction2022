@@ -32,7 +32,7 @@ class UserLogin(APIView):
                 return Response("Wrong password", status = 401)
             token   = Token.create(user)
             token.save()
-            return Response(user.public_key, status=200)
+            return Response({'public_key': user.public_key, 'token': token.token}, status=200)
         except:
             return Response("User does not exist", status = 404)
 
