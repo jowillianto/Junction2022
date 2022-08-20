@@ -1,5 +1,5 @@
 .register{
-	width 		: 50vw;
+	width 		: 60vw;
 	margin		: auto;
 	display 	: flex;
 	flex-flow : row-wrap;
@@ -13,17 +13,29 @@
 	padding 	: 2em 2em 0 2em;
 }
 .register-left{
-	background-color: #A3A3A3;
+	background-color: var(--color3);
 }
 .register-right{
-	background-color: #C3C3C3;
+	background-color: var(--color1);
 }
+.register-left h1{
+	font-family: "ClashGrotesk-Bold";
+	font-size: 3em;
+}
+
 .register-right .register-form input{
-	width 		: 100%;
-	padding 	: 0.5em 0.5em;
+	width 		: 93%;
+	padding 	: 1em 1em;
 	border-radius: 0.5em;
-	border 		: 0;
+	border 		: 1px black solid;
 }
 .register-right .input-title p{
 	margin-bottom: 3px;
+}
+
+.register-right .submit button{
+	width 				: 100%;
+	border-radius	: 0.5em;
+	border 				: 1px black solid;
+	padding 			: 1em 1em;
 }

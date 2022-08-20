@@ -1,15 +1,14 @@
 .ngo-set{
 	display 	: flex;
 	flex-flow : row wrap;
-	width 		: 90vw;
-	
+	justify-content: space-between;
 }
 .ngo-list{
 	margin 		: auto;
-	width 		: 90vw;
+	padding		: 0 15%;
 }
 .ngo-set>div>div{
-	width 		: 40vw;
+	width 		: 30vw;
 	margin 		: 1em;
 	border-radius: 0.5em;
 }
