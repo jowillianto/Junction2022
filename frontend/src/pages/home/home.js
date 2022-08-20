@@ -153,7 +153,7 @@ export default class Home extends React.Component{
   render(){
     return (
       <LayoutGrid>
-        <HomepageLeft />
+        <HomepageLeft isLoggedIn = {this.props.isLoggedIn}/>
         <HomepageRight />
       </LayoutGrid>
     )
