@@ -25,8 +25,8 @@ services:
     build:
       dockerfile: ../install/dockerfile.frontend
       context   : ./frontend
-    depends_on:
-      - backend
+    # depends_on:
+    #   - backend
     environment:
       - CHOKIDAR_USEPOLLING=true
       - WDS_SOCKET_PORT=0
@@ -44,13 +44,13 @@ services:
     environment:
       - NGINX_FRONTEND_PORT=8080
       - NGINX_BACKEND_PORT=8081
-  ignite:
-    build:
-      dockerfile: dockerfile.ignite
-      context: ./install
-    environment:
-      - HOME=/app
-    command: ignite chain serve
-    volumes:
-      - ./data/blc:/app/sdh
-      - ./blockchain:/app/chain
+  # ignite:
+  #   build:
+  #     dockerfile: dockerfile.ignite
+  #     context: ./install
+  #   environment:
+  #     - HOME=/app
+  #   command: ignite chain serve
+  #   volumes:
+  #     - ./data/blc:/app/sdh
+  #     - ./blockchain:/app/chain
