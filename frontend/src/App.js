@@ -21,7 +21,7 @@ export default class App extends React.Component {
   render = () => {
     return (
       <UserContext.Provider value={this.state}>
-        <Routing />
+        <Routing user = {this.state}/>
       </UserContext.Provider>
     );
   };

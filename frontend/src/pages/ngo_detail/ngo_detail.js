@@ -1,7 +1,7 @@
 import React from 'react'
 import { NavigateParamsContext } from '../../routes/utils'
 import LayoutGrid from '../../share/grid/grid'
-import { NGOObject } from '../../API/ngo'
+import NGO, { NGOObject } from '../../API/ngo'
 import TitleDesc from '../../share/titleDesc/titleDesc'
 import './ngo_detail.css'
 import InfoCard from '../../share/infocard/infocard'
@@ -125,12 +125,17 @@ export default class NGODetails extends React.Component{
   }
   componentDidMount(){
     let ngoId   = this.context.match.params.ngoId
+    NGO.all({id : ngoId})
+    .then((ngos) => this.setState({ngo : ngos[0]}))
+    .catch((err) => console.error(err))
   }
   render(){
+    let noNGO = this.state.ngo === undefined
+    if(!noNGO) this.context.navigate('/ngo-companies')
     return(
       <LayoutGrid>
-        <NGODetailLeft ngo = {this.state.ngo}/>
-        <NGODetailRight ngo = {this.state.ngo}/>
+        {!noNGO && <NGODetailLeft ngo = {this.state.ngo}/>}
+        {!noNGO && <NGODetailRight ngo = {this.state.ngo}/>}
       </LayoutGrid>
     )
   }
