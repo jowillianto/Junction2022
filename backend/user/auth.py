@@ -9,7 +9,7 @@ class UserAuthentication(authentication.BaseAuthentication):
     def authenticate(self, request : Request):
         token   = request.headers['Authorization'].split()[1]
         try:
-            user    = User.objects.get(token = token)
+            user    = User.objects.get(token__token = token)
         except ObjectDoesNotExist:
             raise exception.AuthenticationFailed('Lol')
         return (user, None)

@@ -16,8 +16,8 @@ export default class App extends React.Component {
     };
   }
   setUser = (user: User) => {
-    this.setUser({ user: user });
-  };
+    this.setState({ user: user });
+  }
   render = () => {
     return (
       <UserContext.Provider value={this.state}>

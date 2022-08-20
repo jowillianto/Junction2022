@@ -1,5 +1,6 @@
 import React from 'react'
 import User from '../../API/user'
+import { UserContext } from '../../routes/utils'
 import './login.css'
 
 class LoginLeft extends React.Component{
@@ -17,6 +18,7 @@ class LoginLeft extends React.Component{
 
 
 class LoginForm extends React.Component{
+  static contextType = UserContext
   constructor(props){
     super(props)
     this.state  = {
@@ -78,14 +80,15 @@ class LoginForm extends React.Component{
     )
   }
   submitLogin = () => {
-    User.login({
-      username : this.state.form.username.value, 
-      password : this.state.form.password.value
-    })
+    User.login(
+      this.state.form.email.value, 
+      this.state.form.password.value
+    )
     .then((user) => {
-      this.props.setUser(user)
+      this.context.setUser(user)
       window.location.href = '/'
     })
+    .catch((err) => console.error(err))
   }
   renderButton(){
     return(

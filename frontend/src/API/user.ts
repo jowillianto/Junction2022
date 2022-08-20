@@ -54,7 +54,7 @@ export default class User extends UserBase {
     });
   };
   checkLogin = (): Promise<AxiosResponse> => {
-    let endpoint = new AuthEndpoint("get", `user/checklogin/`, UNIVERSAL_TOKEN);
+    let endpoint = new AuthEndpoint("get", `user/checklogin`, UNIVERSAL_TOKEN);
     return endpoint.req();
   };
 
@@ -63,15 +63,15 @@ export default class User extends UserBase {
       username: username,
       password: password,
     };
-    let endpoint = new Endpoint("post", "user/login/");
+    let endpoint = new Endpoint("post", "user/login");
     return new Promise((res, rej) => {
       endpoint
-        .req(payload)
-        .then((resp) => {
-          UNIVERSAL_TOKEN.token = resp.data.token;
-          res(new User(resp.data.public_key));
-        })
-        .catch((err) => rej(err));
+      .req(payload)
+      .then((resp) => {
+        UNIVERSAL_TOKEN.token = resp.data.token;
+        res(new User(resp.data.public_key));
+      })
+      .catch((err) => rej(err));
     });
   };
   static register = (
@@ -86,13 +86,13 @@ export default class User extends UserBase {
       password: password,
       public_key: public_key,
     };
-    let endpoint = new Endpoint("post", "user/register/");
+    let endpoint = new Endpoint("post", "user/register");
     return new Promise((res, rej) => {
       endpoint
         .req(payload)
         .then((resp) => {
           UNIVERSAL_TOKEN.token = resp.data.token;
-          res(new User());
+          res(new User(payload.public_key));
         })
         .catch((err) => rej(err));
     });

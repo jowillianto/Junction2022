@@ -48,7 +48,7 @@ export default class Routing extends React.Component{
           <Navbar isLoggedIn = {this.state.isLoggedIn}/>
           <Routes>
             <Route path = '/' element = {<Home 
-              isLoggedIn = {this.state.isLoggedIn} 
+              isLoggedIn = {this.state.isLoggedIn}
             />
             } />
             <Route path = '/login' element = {<Login 
