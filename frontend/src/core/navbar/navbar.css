@@ -3,7 +3,7 @@ nav{
   flex-flow : row wrap;
   justify-content: space-between;
   padding   : 0 15%;
-  background-color: var(--color1);
+  background-color: var(--color6);
   margin    : 0;
   position  : sticky;
   width     : calc(100% - 30%);
@@ -28,6 +28,10 @@ nav{
   justify-content: left;
   align-items: center;
 }
+.navbar-left-button:first-child{
+	color 		: var(--color1);
+}
+
 .navbar-left-button a{
   width     : 100px;
   text-align: center;
@@ -46,6 +50,9 @@ nav{
 .navbar-right a{
   border      : 1px black solid;
   padding     : 1em 4em;
+  background-color: var(--color1);
+  color 			: var(--color6);
+  font-weight: 900;
 }
 .navbar-right .navbar-right-usr-icn a{
   border      : 0;
