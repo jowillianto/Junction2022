@@ -1,193 +1,224 @@
-import React from 'react'
-import { UserContext } from '../../routes/utils'
-import './profile.css'
-import BlankAvatar from '../../assets/blank_avatar.png'
-import { getBalance, getTransactionFrom, getWalletFromMnemonic, sendCoin, top1Transaction } from '../../experiment'
-import NGO from '../../API/ngo'
+import React from "react";
+import { UserContext } from "../../routes/utils";
+import "./profile.css";
+import BlankAvatar from "../../assets/blank_avatar.png";
+import {
+  getBalance,
+  getTransactionFrom,
+  getWalletFromMnemonic,
+  sendCoin,
+  top1Transaction,
+} from "../../experiment";
+import NGO from "../../API/ngo";
 
-class ProfileLeft extends React.Component{
-  constructor(props){
-    super(props)
+class ProfileLeft extends React.Component {
+  constructor(props) {
+    super(props);
     this.state = {
-      transaction : []
-    }
+      transaction: [],
+    };
   }
-  componentDidMount(){
-    let pubKey  = this.props.user.pubKey
-    getWalletFromMnemonic(pubKey)
-    .then((resp) => {
-      getTransactionFrom(resp)
-      .then((resp) => {
-        this.setState({transaction : resp})
-      })
-    })
+  componentDidMount() {
+    let pubKey = this.props.user.pubKey;
+    getWalletFromMnemonic(pubKey).then((resp) => {
+      getTransactionFrom(resp).then((resp) => {
+        this.setState({ transaction: resp });
+      });
+    });
   }
-  renderUpper(){
-    let user = this.props.user
+  renderUpper() {
+    let user = this.props.user;
     return (
-      <div className = 'profile-left-upper'>
-        <div className = 'profile-left-username'>
+      <div className="profile-left-upper">
+        <div className="profile-left-username">
           <p>{user.username}</p>
         </div>
-        <div className = 'profile-left-avatar'>
-          <div className = 'profile-avatar-left'>
-            <img src = {BlankAvatar}/>
+        <div className="profile-left-avatar">
+          <div className="profile-avatar-left">
+            <img src={BlankAvatar} />
           </div>
-          <div className = 'profile-avatar-right'>
-            <div className = 'profile-avatar-right-email'>
+          <div className="profile-avatar-right">
+            <div className="profile-avatar-right-email">
               <p>{user.email}</p>
             </div>
-            <div className = 'profile-avatar-wallet'>
-              <div className = 'profile-wallet-text'>
+            <div className="profile-avatar-wallet">
+              <div className="profile-wallet-text">
                 <p> Amount donated</p>
               </div>
-              <div className = 'profile-wallet-amount'>
+              <div className="profile-wallet-amount">
                 <p>{user.amount}</p>
               </div>
             </div>
           </div>
         </div>
       </div>
-    )
+    );
   }
-  renderLower(){
+  renderLower() {
+    return <div className="profile-left-lower"></div>;
+  }
+  render() {
     return (
-      <div className = 'profile-left-lower'>
-        
-      </div>
-    )
-  }
-  render(){
-    return(
-      <div className = 'profile-left'>
+      <div className="profile-left">
         {this.renderUpper()}
         {this.renderLower()}
       </div>
-    )
+    );
   }
-} 
+}
 
-class ProfileRight extends React.Component{
-  constructor(props){
-    super(props)
+class ProfileRight extends React.Component {
+  static contextType = UserContext;
+  constructor(props) {
+    super(props);
     this.state = {
-      ngoList : [],
-      selectedId : 0,
-      donateAmount : 0, 
-      warn  : ''
+      ngoList: [],
+      selectedId: 0,
+      donateAmount: 0,
+      warn: "",
+      ngoChain: [],
+    };
+  }
+  recursiveTransactions(allNgo) {
+    let curWallet = this.state.ngoList[0].wallet;
+    let sentTo = "";
+    let num = 0;
+    while (curWallet != sentTo && !sentTo) {
+      if (num == 2) {
+        break;
+      } else {
+        num = num + 1;
+      }
+      getTransactionFrom(this.state.ngoList[0].wallet).then((val) => {
+        top1Transaction(val).then((val) => {
+          sentTo = val.to;
+          let findNGO = allNgo.filter((val) => {
+            return val.wallet == sentTo;
+          });
+          this.state.ngoChain.push(findNGO);
+        });
+      });
     }
   }
-  componentDidMount(){
+  componentDidMount() {
     NGO.all()
-    .then((ngos) => this.setState({ngoList : ngos}))
-    .catch((err) => console.error(err))
-    
-  }
-  recursiveTransactions(source, depth, list){
-    
+      .then((ngos) => {
+        this.setState({ ngoList: ngos });
+        this.recursiveTransactions(ngos);
+      })
+      .catch((err) => console.error(err));
   }
   handleSelect = (event) => {
-    this.setState({selectId : event.target.value})
-  }
+    this.setState({ selectId: event.target.value });
+  };
   handleDonate = () => {
-    let user  = this.props.user
-    let ngo   = this.props.ngoList[this.props.selectedId]
-    sendCoin(user.publicKey, ngo.wallet, this.donateAmount)
-    .then(() => {
-      this.setState({donateAmount : 0, warn : 'Donate successful'})
-    })
-  }
+    let user = this.props.user;
+    let ngo = this.props.ngoList[this.props.selectedId];
+    sendCoin(user.publicKey, ngo.wallet, this.donateAmount).then(() => {
+      this.setState({ donateAmount: 0, warn: "Donate successful" });
+    });
+  };
   handleDonateChange = (event) => {
     this.setState({
-      donateAmount : event.target.value, 
-      warn        : ''
-    })
-  }
-  renderDonate(){
-    let ngoList   = this.state.ngoList
-    let selId     = this.state.selectedId
+      donateAmount: event.target.value,
+      warn: "",
+    });
+  };
+  renderDonate() {
+    let ngoList = this.state.ngoList;
+    let selId = this.state.selectedId;
     return (
-      <div className = 'profile-right-upper'>
-        <div className = 'profile-right-ngo-name'>
+      <div className="profile-right-upper">
+        <div className="profile-right-ngo-name">
           <p>NGO Name</p>
         </div>
-        <div className = 'profile-right-select'>
-          <select value = {selId} onChange = {this.onChange}>
-            {ngoList.map(
-              (val, id) => <option value = {id}>{val.name}</option>
-            )}
+        <div className="profile-right-select">
+          <select value={selId} onChange={this.onChange}>
+            {ngoList.map((val, id) => (
+              <option value={id}>{val.name}</option>
+            ))}
           </select>
         </div>
-        <div className = 'profile-right-donate-amount'>
-          <div className = 'profile-right-amount-title'>
+        <div className="profile-right-donate-amount">
+          <div className="profile-right-amount-title">
             <p>
-              <span className = 'amount-left'>Amount</span>
-              <span className = 'amount-right'>Crypto</span>
+              <span className="amount-left">Amount</span>
+              <span className="amount-right">Crypto</span>
             </p>
           </div>
-          <div className = 'profile-donate-input'>
-            <input type = 'text' value = {this.props.donateAmount} onChange = {this.handleDonateChange} />
+          <div className="profile-donate-input">
+            <input
+              type="text"
+              value={this.props.donateAmount}
+              onChange={this.handleDonateChange}
+            />
           </div>
-          <div className = 'profile-donate-button'>
-            <button onClick = {this.handleDonate}>Donate</button> 
+          <div className="profile-donate-button">
+            <button onClick={this.handleDonate}>Donate</button>
           </div>
           <p>{this.state.warn}</p>
         </div>
       </div>
-    )
+    );
   }
-  renderHistory(){
-    
-  }
-  render(){
-    return(
-      <div className = 'profile-right'>
+  renderHistory() {}
+  render() {
+    return (
+      <div className="profile-right">
         {this.renderDonate()}
         {this.renderHistory()}
       </div>
-    )
+    );
   }
 }
 
-export default class Profile extends React.Component{
-  static contextType = UserContext
-  constructor(props){
-    super(props)
+export default class Profile extends React.Component {
+  static contextType = UserContext;
+  constructor(props) {
+    super(props);
     this.state = {
-      user : {
-        id : -1, username : '', email : '', amount : ''
-      }
-    }
+      user: {
+        id: -1,
+        username: "",
+        email: "",
+        amount: "",
+      },
+    };
   }
-  componentDidMount(){
-    this.context.user.get()
-    .then((resp) => {
-      let user    = resp.data
-      let pubKey  = this.context.user.publicKey
-      getWalletFromMnemonic(pubKey)
+  componentDidMount() {
+    this.context.user
+      .get()
       .then((resp) => {
-        let amount = getBalance(resp)
-        user  = Object.assign(user, {
-          amount : amount
-        })
-        this.setState({
-          amount : amount, user : user
-        }, console.log(this.state))
+        let user = resp.data;
+        let pubKey = this.context.user.publicKey;
+        getWalletFromMnemonic(pubKey)
+          .then((resp) => {
+            let amount = getBalance(resp);
+            user = Object.assign(user, {
+              amount: amount,
+            });
+            this.setState(
+              {
+                amount: amount,
+                user: user,
+              },
+              console.log(this.state)
+            );
+          })
+          .catch((err) => {
+            this.setState({
+              user: user,
+            });
+          });
       })
-      .catch((err) => {
-        this.setState({
-          user : user
-        })
-      })
-    })
-    .catch((err) => console.error(err))
+      .catch((err) => console.error(err));
   }
-  render(){
+  render() {
     return (
-      <div className = 'profile'>
-        <ProfileLeft user = {this.state.user}/>
-        <ProfileRight user = {this.state.user}/>
+      <div className="profile">
+        <ProfileLeft user={this.state.user} />
+        <ProfileRight user={this.state.user} />
       </div>
-    )
+    );
   }
 }

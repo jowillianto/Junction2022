@@ -141,7 +141,7 @@ const top1Transaction = (
 ): Array<Transaction> => {
   var transactionRes = new Array<Transaction>();
   transactionList.sort((a, b) => {
-    return parseInt(a.token) - parseInt(b.token);
+    return parseInt(b.token) - parseInt(a.token);
   });
   return transactionList.slice(0, 1);
 };
