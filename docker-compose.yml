@@ -10,6 +10,7 @@ services:
       target: dev
     command: sh -c "
       python3 manage.py migrate &&
+      python3 manage.py loaddata init_data.json &&
       python3 manage.py runserver 0.0.0.0:8000"
     volumes:
       - ./backend:/app
