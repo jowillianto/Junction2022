@@ -68,7 +68,7 @@ class DonateLeft extends React.Component {
     NGO.all({id : this.props.ngoId})
     .then((val) => {
       if(val.length == 0) window.location.href = '/not-found'
-      this.setState({ ngo: val[1] });
+      this.setState({ ngo: val[0] });
     });
   }
 
@@ -199,7 +199,8 @@ export default class Donate extends React.Component {
   static contextType = NavigateParamsContext
   constructor(props){
     super(props)
-    this.ngoId  = window.location.href.split('/')[-1]
+    this.url  = window.location.href.split('/')
+    this.ngoId= this.url[this.url.length - 1]
   }
   componentDidMount(){
 

@@ -33,6 +33,7 @@ export class Endpoint extends BaseEndpoint{
       data    : payload, 
       params  : params
     }
+    console.log(config)
     return axios.request(config)
   }
 }
