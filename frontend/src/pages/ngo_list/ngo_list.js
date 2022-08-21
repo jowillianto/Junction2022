@@ -1,4 +1,5 @@
 import React from 'react'
+import NGO from '../../API/ngo'
 import NGORenderer from '../../share/ngo/NGORenderer'
 import './ngo_list.css'
 
@@ -10,15 +11,9 @@ export default class NGOList extends React.Component{
     }
   }
   componentDidMount(){
-    let NGO_TEMPLATE = {
-      name        : 'NGO Name', 
-      avatar      : 'LOL', 
-      value       : '00000',
-      description : 'Consetectuer Adipisincg Elit asd afkhvauodghnm adfjhhnfasjh '
-    }
-    this.setState({
-      ngoList : Array(10).fill(NGO_TEMPLATE)
-    })
+    NGO.all()
+    .then((ngos) => this.setState({ngoList : ngos}))
+    .catch((err) => console.error(err))
   }
   renderNGOTwoBlock(array){
     return(
