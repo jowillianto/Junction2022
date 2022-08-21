@@ -3,7 +3,7 @@ import User from "../../API/user";
 import LayoutGrid from "../../share/grid/grid";
 import NGO from "../../API/ngo";
 import { getBalance, getWalletFromMnemonic, sendCoin } from "../../experiment";
-import { UserContext } from "../../routes/utils";
+import { NavigateParamsContext, UserContext } from "../../routes/utils";
 
 class DonateLeft extends React.Component {
   static contextType = UserContext;
@@ -195,6 +195,13 @@ class DonateRight extends React.Component {
 }
 
 export default class Donate extends React.Component {
+  static contextType = NavigateParamsContext
+  constructor(props){
+    super(props)
+  }
+  componentDidMount(){
+    this.ngoId  = this.context.params.match.ngoId
+  }
   render() {
     return (
       <LayoutGrid>

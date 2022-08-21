@@ -5,6 +5,11 @@
   min-height      : inherit;
   align-items     : flex-start;
 }
+.grid-bg-left{
+  background-image: url('../../assets/infinity.png');
+  background-size: cover;
+  background-repeat: none;
+}
 .homepage-left{
   padding         : 0 0 0 15%;
 }

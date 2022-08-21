@@ -12,3 +12,13 @@
 	margin 		: 1em;
 	border-radius: 0.5em;
 }
+.ngo-set button{
+	background-color: var(--color1);
+	color 					: white;
+	border-radius 	: 0.2em;
+	padding 				: 0.5em 0.5em;
+	width 					: 32vw;
+	margin					: 1em;
+	font-size 			: 1em;
+	font-weight 		: 700;
+}
