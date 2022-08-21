@@ -41,10 +41,10 @@ export default class Routing extends React.Component{
     }
   }
   componentDidMount(){
-    // this.updateLoggedIn()
+    this.updateLoggedIn()
   }
   componentDidUpdate(){
-    this.updateLoggedIn()
+    // this.updateLoggedIn()
   }
   render(){
     return(
