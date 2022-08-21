@@ -68,7 +68,7 @@ class DonateLeft extends React.Component {
     NGO.all({id : this.props.ngoId})
     .then((val) => {
       if(val.length == 0) window.location.href = '/not-found'
-      this.setState({ ngo: val[0] });
+      this.setState({ ngo: val[1] });
     });
   }
 

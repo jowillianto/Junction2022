@@ -13,15 +13,20 @@ import NGO from "../../API/ngo";
 import NGORenderer from "../../share/ngo/NGORenderer";
 
 class ProfileLeft extends React.Component {
+  static contextType = UserContext
   constructor(props) {
     super(props);
     this.state = {
       transaction: [],
+      balance: 0,
     };
   }
   componentDidMount() {
-    let pubKey = this.props.user.pubKey;
+    let pubKey = this.context.user.publicKey;
     getWalletFromMnemonic(pubKey).then((resp) => {
+      getBalance(resp).then((res)=>{
+        this.setState({balance: res})
+      })
       getTransactionFrom(resp).then((resp) => {
         this.setState({ transaction: resp });
       });
@@ -55,7 +60,7 @@ class ProfileLeft extends React.Component {
                 <p> Balance</p>
               </div>
               <div className="profile-wallet-amount">
-                <p>0</p>
+                <p>{this.state.balance}</p>
               </div>
             </div>
           </div>
@@ -87,18 +92,18 @@ class ProfileRight extends React.Component {
       warn: "",
       ngoChain: [
         {
-          name: "IRT",
+          name: "Barehand Uninv",
           description: "nice",
           avatar: "",
-          value: 360,
+          value: 100,
           wallet: "osmo1ekjwn40e6kvhhpds454ycgj45m7aznn0tglphj",
           amount: 360,
         },
         {
-          name: "Barehand Univ",
+          name: "Skyesa",
           description: "nice",
           avatar: "",
-          value: 340,
+          value: 80,
           wallet: "osmo19uqaag7j6rvznnnxu8k7q7pwgnh9wvzxhwda3x",
           amount: 340,
         },
@@ -106,29 +111,31 @@ class ProfileRight extends React.Component {
     };
   }
   recursiveTransactions(allNgo) {
-    let curWallet = this.state.ngoList[0].wallet;
+    let curWallet = this.state.ngoList[1].wallet;
+    let ngoChain  = []
     let sentTo = "";
     let num = 0;
     while (curWallet != sentTo && !sentTo) {
+      console.log(curWallet)
       if (num == 2) {
         break;
       } else {
         num = num + 1;
       }
-      getTransactionFrom(this.state.ngoList[0].wallet).then((val) => {
+      getTransactionFrom(this.state.ngoList[1].wallet).then((val) => {
         top1Transaction(val).then((val) => {
           sentTo = val.to;
           let findNGO = allNgo.filter((val) => {
             return val.wallet == sentTo;
           });
-          this.state.ngoChain.push(findNGO);
+          ngoChain.push(findNGO);
+          console.log('adsfasdf', findNGO)
         });
       });
     }
   }
 
   componentDidMount() {
-    console.log("starting profile");
     NGO.all()
       .then((ngos) => {
         this.setState({ ngoList: ngos });

@@ -31,6 +31,7 @@ export default class Routing extends React.Component{
   }
   updateLoggedIn = () => {
     if(this.state.isLoggedIn !== true){
+      console.log(this.context.user)
       if(this.context.user !== null){
         this.context.user.checkLogin()
         .then((resp) => this.setState({isLoggedIn : true}))

@@ -21,7 +21,7 @@ abstract class BaseEndpoint{
 }
 
 export class Endpoint extends BaseEndpoint{
-  req = (
+  req =   (
     payload : Object = {}, 
     headers : AxiosRequestHeaders = {}, 
     params : Object = {}
