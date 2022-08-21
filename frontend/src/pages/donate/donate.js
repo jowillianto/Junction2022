@@ -4,6 +4,7 @@ import LayoutGrid from "../../share/grid/grid";
 import NGO from "../../API/ngo";
 import { getBalance, getWalletFromMnemonic, sendCoin } from "../../experiment";
 import { NavigateParamsContext, UserContext } from "../../routes/utils";
+import './donate.css'
 
 class DonateLeft extends React.Component {
   static contextType = UserContext;
@@ -62,8 +63,9 @@ class DonateLeft extends React.Component {
   }
 
   componentDidMount() {
-    NGO.all().then((val) => {
-      console.log(val);
+    NGO.all({id : this.props.ngoId})
+    .then((val) => {
+      if(val.length == 0) window.location.href = '/not-found'
       this.setState({ ngo: val });
     });
   }
@@ -198,15 +200,16 @@ export default class Donate extends React.Component {
   static contextType = NavigateParamsContext
   constructor(props){
     super(props)
+    this.ngoId  = window.location.href.split('/')[2]
   }
   componentDidMount(){
-    this.ngoId  = this.context.params.match.ngoId
+
   }
   render() {
     return (
       <LayoutGrid>
-        <DonateLeft />
-        <DonateRight />
+        <DonateLeft ngoId = {this.ngoId}/>
+        <DonateRight ngoId = {this.ngoId}/>
       </LayoutGrid>
     );
   }
