@@ -16,10 +16,12 @@
   width           : 80%;
 }
 .homepage-left .today-donation{
-  background-color: #c3c3c3;
   padding         : 2em;
   border-radius   : 1em;
   margin-bottom   : 2em;
+  backdrop-filter : blur(10px);
+  background-color: rgba(255, 255, 255, 0.5);
+  color 					: var(--color6);
 }
 .homepage-left .today-donation .donate-title{
   font-size       : 1.2em;
@@ -34,7 +36,13 @@
   font-size       : 4em;
   font-weight     : 900;
   margin          : 0;
-  font-family     : 'ClashGrotesk-Bold'
+  font-family     : 'ClashGrotesk-Bold';
+	background 			: -webkit-linear-gradient(var(--color6), var(--color4));
+	-webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.home-desc{
+	color 		: var(--color6);
 }
 .private-home-button, .public-home-button{
   display   : flex;
@@ -47,13 +55,14 @@
   text-align    : center;
   padding       : 1em 4em;
   border-radius : 0.1em;
+  color 				: white;
 }
 .private-home-button .button-left a, 
 .public-home-button .button-left a, 
 .public-home-button .button-right a
 {
-  background-color: var(--color1);
-  border          : 1px solid black;
+  background-color: none;
+  border          : 0.1em solid white;
 }
 
 .homepage-right{

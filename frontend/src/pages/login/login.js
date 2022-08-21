@@ -11,7 +11,7 @@ class LoginLeft extends React.Component{
   render(){
     return (
       <div className = 'login-left'>
-        <h1>Amet minim mollit non dese</h1>
+        <h1>Transparently Connect the World</h1>
       </div>
     )
   }

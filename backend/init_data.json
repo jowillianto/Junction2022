@@ -1,0 +1,33 @@
+[{
+  "model" : "ngo.ngo", 
+  "pk" : 1, 
+  "fields" : {
+    "name" : "IRT", 
+    "description" : "We are striving for the environment",
+    "wallet" : "osmo1ekjwn40e6kvhhpds454ycgj45m7aznn0tglphj"
+  }
+}, {
+  "model" : "ngo.ngo", 
+  "pk" : 2, 
+  "fields" : {
+    "name" : "Barehand", 
+    "description" : "We are striving for the environment",
+    "wallet" : "osmo19uqaag7j6rvznnnxu8k7q7pwgnh9wvzxhwda3x"
+  }
+}, {
+  "model" : "ngo.ngo", 
+  "pk" : 3, 
+  "fields" : {
+    "name" : "Skyesa", 
+    "description" : "We are striving for the environment",
+    "wallet" : "osmo18s5ct2wg6jgv55r2vv4y8g7e5qezzsehzq5suu"
+  }
+}, {
+  "model" : "ngo.ngo", 
+  "pk" : 4, 
+  "fields" : {
+    "name" : "Ashaka", 
+    "description" : "We are striving for the environment",
+    "wallet" : "osmo1tym6tp6tcdmqgpyfgdzks7ulu2mq6wycm85dyf"
+  }
+}]

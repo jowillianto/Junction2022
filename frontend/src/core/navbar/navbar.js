@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { NavigateParamsContext } from '../../routes/utils'
 import './navbar.css'
-import BlankAvatar from '../../assets/blank_avatar.png'
+import BlankAvatar from '../../assets/profile icon.png'
 
 export default class Navbar extends React.Component{
   static contextType = NavigateParamsContext
