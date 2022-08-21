@@ -1,3 +1,4 @@
+import { getBalance } from "../experiment";
 import { Endpoint } from "./base";
 
 export interface NGOObject {
@@ -6,6 +7,7 @@ export interface NGOObject {
   avatar: string;
   value: number;
   wallet: string;
+  amount: number;
 }
 
 abstract class NGOBase {
@@ -18,7 +20,16 @@ export default class NGO extends NGOBase {
     return new Promise((res, rej) => {
       endpoint
         .req({}, {}, params)
-        .then((resp) => res(resp.data))
+        .then((resp) => {
+          console.log(resp.data);
+          for (let i = 0; i < resp.data.length; i++) {
+            getBalance(resp.data[i].wallet).then(
+              (val) => (resp.data[i]["amount"] = val)
+            );
+          }
+          console.log(resp.data);
+          res(resp.data);
+        })
         .catch((err) => rej(err));
     });
   };
