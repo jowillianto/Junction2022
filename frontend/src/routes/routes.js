@@ -8,6 +8,7 @@ import PrivateRoute from './privateroute'
 import Loading from '../core/loading/loading'
 import {NavigateParams, UserContext} from './utils'
 import Navbar from '../core/navbar/navbar'
+import Footer from '../core/footer/footer'
 
 // Imports
 const Home        = React.lazy(() => import('../pages/home/home'))
@@ -101,6 +102,7 @@ export default class Routing extends React.Component{
               } />
             </Route>
           </Routes>
+          <Footer />
         </React.Suspense >
       </Router>
     )

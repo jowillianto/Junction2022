@@ -54,13 +54,21 @@ nav{
   color 			: var(--color6);
   font-weight: 900;
 }
+.navbar-right .navbar-right-donate a:hover{
+	background-color 	: white;
+	border: 0.1em var(--color1) solid;
+	color: var(--color1);
+	box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
 .navbar-right .navbar-right-usr-icn a{
   border      : 0;
   padding     : 0;
+  background-color : var(--color6);
 }
 .navbar-right .navbar-right-usr-icn img{
   height      : 6vh;
   width       : 6vh;
-  border      : 0.2em black solid;
+  border      : 0.2em var(--color1) solid;
   border-radius: 50%;
 }

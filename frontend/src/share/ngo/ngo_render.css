@@ -1,8 +1,9 @@
 .ngo-obj{
-  background-color: var(--color1);
+  background-color: var(--color6);
   padding         : 1em;
   border-radius   : 0.5em;
   font-family     : "ClashGrotesk-Regular";
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
 .ngo-obj span.ngo-obj-val{

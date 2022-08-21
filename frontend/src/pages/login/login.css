@@ -1,3 +1,8 @@
+#root{
+	background-image: url('../../assets/purple.png');
+	background-size : cover;
+	box-shadow: inset 0 0 0 1000px rgba(47,0, 123, 0.5);
+}
 .login{
 	width 		: 60vw;
 	margin		: auto;
@@ -13,14 +18,20 @@
 	padding 	: 2em 2em 0 2em;
 }
 .login-left{
-	background-color: var(--color3);
+	background-image: url('../../assets/chain.png');
+	background-size : cover;
 }
 .login-right{
-	background-color: var(--color1);
+	background-color: var(--color6);
 }
 .login-left h1{
-	font-family: "ClashGrotesk-Bold";
-	font-size: 3em;
+  font-size       : 3em;
+  font-weight     : 900;
+  margin          : 0;
+  font-family     : 'ClashGrotesk-Bold';
+	background 			: -webkit-linear-gradient(var(--color6), var(--color4));
+	-webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .login-right .login-form input{
@@ -28,6 +39,13 @@
 	padding 	: 1em 1em;
 	border-radius: 0.5em;
 	border 		: 1px black solid;
+	background-color: white;
+	outline: 0;
+}
+.login-right .login-form input:focus{
+	border 		: 0.2em var(--color1) solid;
+	box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+	outline: 0;
 }
 .login-right .input-title p{
 	margin-bottom: 3px;
@@ -37,5 +55,8 @@
 	width 				: 100%;
 	border-radius	: 0.5em;
 	border 				: 1px black solid;
-	padding 			: 1em 1em;
+	padding 			: 0.5em 0.5em;
+	background-color: var(--color1);
+	color: var(--color6);
+	font-size 		: 1.2em;
 }
