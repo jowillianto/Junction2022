@@ -27,7 +27,7 @@ class ProfileLeft extends React.Component{
     return (
       <div className = 'profile-left-upper'>
         <div className = 'profile-left-username'>
-          {user.username}
+          <p>{user.username}</p>
         </div>
         <div className = 'profile-left-avatar'>
           <div className = 'profile-avatar-left'>
@@ -170,7 +170,14 @@ export default class Profile extends React.Component{
         user  = Object.assign(user, {
           amount : amount
         })
-        this.setState({amount : amount})
+        this.setState({
+          amount : amount, user : user
+        }, console.log(this.state))
+      })
+      .catch((err) => {
+        this.setState({
+          user : user
+        })
       })
     })
     .catch((err) => console.error(err))
