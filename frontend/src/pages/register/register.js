@@ -100,7 +100,7 @@ class RegisterForm extends React.Component {
     )
     .then((user) => {
       this.context.setUser(user)
-      navigate('/')
+      window.location.href = '/'
     })
     .catch((err) => {
       if(err.response && err.response.status === 400){
