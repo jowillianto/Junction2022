@@ -13,7 +13,9 @@ class DonateLeft extends React.Component {
     this.state = {
       amount: 0,
       crypto: 0.0,
-      ngo: [],
+      ngo: {
+        name  : 'lol', description : ''
+      },
       selectedNGO: {},
     };
     this.handleAmountChange = this.handleAmountChange.bind(this);
@@ -66,18 +68,21 @@ class DonateLeft extends React.Component {
     NGO.all({id : this.props.ngoId})
     .then((val) => {
       if(val.length == 0) window.location.href = '/not-found'
-      this.setState({ ngo: val });
+      this.setState({ ngo: val[0] });
     });
   }
 
   doDonate = () => {
     sendCoin(
-      this.context.user.public_key,
-      this.state.selectedNGO.wallet,
+      this.context.user.publicKey,
+      this.state.ngo.wallet,
       this.state.crypto
     ).then((res) => {
-      console.log(res);
-    });
+      window.location.href = '/profile'
+    })
+    .catch((err) => {
+      alert("Not enough money")
+    })
   };
 
   renderDonate() {
@@ -85,14 +90,8 @@ class DonateLeft extends React.Component {
       <div className="transaction">
         <div className="transactionText">Transaction</div>
         <div className="chooseNGO">
-          <select
-            value={this.state.selectedNGO}
-            onChange={this.handleNGOChange}
-          >
-            {this.state.ngo.map((val, id) => (
-              <option key={id}>{val.name}</option>
-            ))}
-          </select>
+          <p>{this.state.ngo.name}</p>
+          <p>{this.state.ngo.description}</p>
         </div>
         <div className="button">
           <button onClick={this.doDonate}>Confirm</button>
@@ -200,7 +199,7 @@ export default class Donate extends React.Component {
   static contextType = NavigateParamsContext
   constructor(props){
     super(props)
-    this.ngoId  = window.location.href.split('/')[2]
+    this.ngoId  = window.location.href.split('/')[-1]
   }
   componentDidMount(){
 

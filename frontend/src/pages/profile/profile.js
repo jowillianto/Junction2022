@@ -10,6 +10,7 @@ import {
   top1Transaction,
 } from "../../experiment";
 import NGO from "../../API/ngo";
+import NGORenderer from "../../share/ngo/NGORenderer";
 
 class ProfileLeft extends React.Component {
   constructor(props) {
@@ -49,6 +50,14 @@ class ProfileLeft extends React.Component {
                 <p>{user.amount}</p>
               </div>
             </div>
+            <div className="profile-avatar-wallet">
+              <div className="profile-wallet-text">
+                <p> Balance</p>
+              </div>
+              <div className="profile-wallet-amount">
+                <p>0</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -75,13 +84,13 @@ class ProfileRight extends React.Component {
       ngoList: [],
       selectedId: 0,
       donateAmount: 0,
-      warn: "test",
+      warn: "",
       ngoChain: [
         {
           name: "IRT",
           description: "nice",
           avatar: "",
-          value: 28,
+          value: 360,
           wallet: "osmo1ekjwn40e6kvhhpds454ycgj45m7aznn0tglphj",
           amount: 360,
         },
@@ -89,7 +98,7 @@ class ProfileRight extends React.Component {
           name: "Barehand Univ",
           description: "nice",
           avatar: "",
-          value: 30,
+          value: 340,
           wallet: "osmo19uqaag7j6rvznnnxu8k7q7pwgnh9wvzxhwda3x",
           amount: 340,
         },
@@ -180,7 +189,14 @@ class ProfileRight extends React.Component {
       </div>
     );
   }
-  renderHistory() {}
+  renderHistory() {
+    return(
+      <div className = 'history'>
+        {this.state.ngoChain.map((val) => <NGORenderer ngo = {val}/>
+        )}
+      </div>
+    )
+  }
   render() {
     return (
       <div className="profile-right">
@@ -200,7 +216,7 @@ export default class Profile extends React.Component {
         id: -1,
         username: "",
         email: "",
-        amount: "",
+        amount: 0,
       },
     };
   }
@@ -217,7 +233,7 @@ export default class Profile extends React.Component {
               amount = val;
             });
             user = Object.assign(user, {
-              amount: amount,
+              amount: 0,
             });
             this.setState(
               {
