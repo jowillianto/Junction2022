@@ -1,9 +1,14 @@
-import React from 'react'
+import React from "react";
+// import DoneMessage from "./../../assets/done_message.png";
 
-export default class Home extends React.Component{
-  render(){
+export default class Done extends React.Component {
+  render() {
     return (
-      <h1>HOME</h1>
-    )
+      // <div className="donePage">
+      //   <center>
+      //     <img alt="no image" src={DoneMessage} />
+      //   </center>
+      // </div>
+    );
   }
 }
