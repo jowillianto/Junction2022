@@ -59,4 +59,5 @@ export default class Transaction extends React.Component {
       <TransactionLeft/>
       <TransactionRight/>
     </LayoutGrid>)
+  }
 }

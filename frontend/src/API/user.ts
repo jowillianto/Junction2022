@@ -19,12 +19,33 @@ abstract class UserBase {
   abstract saveToLocal(): void;
 }
 
+export interface UserData{
+  id  : number, 
+  username : string, 
+  email : string
+}
+
 export default class User extends UserBase {
   publicKey: string;
+  data: UserData
   constructor(publicKey: string) {
     super();
     this.publicKey = publicKey;
     this.saveToLocal();
+    this.data      = {
+      id : -1, username : '', email : ''
+    }
+  }
+  get = () => {
+    let endpoint = new AuthEndpoint('get', 'user/profile', UNIVERSAL_TOKEN)
+    return new Promise((res, rej) => {
+      endpoint.req()
+      .then((resp) => {
+        this.data   = resp.data
+        res(resp)
+      })
+      .catch((err) => rej(err))
+    })
   }
   saveToLocal = () => {
     let payload = { publicKey: this.publicKey, token: UNIVERSAL_TOKEN };

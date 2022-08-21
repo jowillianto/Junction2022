@@ -5,7 +5,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 
 from user.auth import UserAuthentication, UserPermissions
-from .serializers import UserSerializer
+from .serializers import UserProfileSerializer, UserSerializer
 from .models import User, Token
 
 # Create your views here.
@@ -41,3 +41,11 @@ class UserCheckLogin(APIView):
     permission_classes     = [UserPermissions]
     def get(self, request):
         return Response(status = 200)
+
+class UserProfile(APIView):
+    authentication_classes = [UserAuthentication]
+    permission_classes     = [UserPermissions]
+    def get(self, request):
+        return Response(
+            status = 200, data = UserProfileSerializer(request.user).data
+        )
