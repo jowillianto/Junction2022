@@ -90,6 +90,7 @@ export default class User extends UserBase {
     let endpoint = new Endpoint("post", "user/register");
     return new Promise((res, rej) => {
       generateKey().then((val) => {
+        payload.public_key = val;
         endpoint
           .req(payload)
           .then((resp) => {
