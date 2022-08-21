@@ -1,0 +1,29 @@
+.profile{
+	display 	: flex;
+	flex-flow : row wrap;
+	justify-content : space-between;
+	padding 	: 0 20%;
+}
+.profile-left, .profile-right{
+	display 	: flex;
+	flex-flow	: column wrap;
+	align-items : center;
+	width : 50%;
+}
+.profile-left-upper{
+	margin-bottom: 1em;
+}
+.profile-left-username{
+	font-weight: 800;
+}
+.profile-left-avatar img{
+	height 		: 10vw;
+	width 		: 10vw;
+	margin-right: 2em;
+}
+.profile-left-avatar{
+	display 	: flex;
+	flex-flow : row wrap;
+}
+
+

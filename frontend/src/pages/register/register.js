@@ -1,6 +1,6 @@
 import React from 'react'
 import User from '../../API/user'
-import { NavigateParams, UserContext } from '../../routes/utils'
+import { NavigateParams, NavigateParamsContext, UserContext } from '../../routes/utils'
 import './register.css'
 
 class RegisterLeft extends React.Component {
@@ -110,13 +110,13 @@ class RegisterForm extends React.Component {
   }
   renderButton(){
     return (
-      <NavigateParams.Consumer>
+      <NavigateParamsContext.Consumer>
         {value => 
           (<div className = 'submit'>
             <button onClick = {() => this.submitRegister(value.navigate)}>Sign Up</button>
           </div>)
         }
-      </NavigateParams.Consumer>
+      </NavigateParamsContext.Consumer>
     )
   }
   render() {
