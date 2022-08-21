@@ -75,8 +75,25 @@ class ProfileRight extends React.Component {
       ngoList: [],
       selectedId: 0,
       donateAmount: 0,
-      warn: "",
-      ngoChain: [],
+      warn: "test",
+      ngoChain: [
+        {
+          name: "IRT",
+          description: "nice",
+          avatar: "",
+          value: 28,
+          wallet: "osmo1ekjwn40e6kvhhpds454ycgj45m7aznn0tglphj",
+          amount: 360,
+        },
+        {
+          name: "Barehand Univ",
+          description: "nice",
+          avatar: "",
+          value: 30,
+          wallet: "osmo19uqaag7j6rvznnnxu8k7q7pwgnh9wvzxhwda3x",
+          amount: 340,
+        },
+      ],
     };
   }
   recursiveTransactions(allNgo) {
@@ -100,11 +117,13 @@ class ProfileRight extends React.Component {
       });
     }
   }
+
   componentDidMount() {
+    console.log("starting profile");
     NGO.all()
       .then((ngos) => {
         this.setState({ ngoList: ngos });
-        this.recursiveTransactions(ngos);
+        // this.recursiveTransactions(ngos);
       })
       .catch((err) => console.error(err));
   }
@@ -193,7 +212,10 @@ export default class Profile extends React.Component {
         let pubKey = this.context.user.publicKey;
         getWalletFromMnemonic(pubKey)
           .then((resp) => {
-            let amount = getBalance(resp);
+            let amount = "";
+            getBalance(resp).then((val) => {
+              amount = val;
+            });
             user = Object.assign(user, {
               amount: amount,
             });
