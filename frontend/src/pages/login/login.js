@@ -87,7 +87,7 @@ class LoginForm extends React.Component{
     )
     .then((user) => {
       this.context.setUser(user) 
-      navigate('/')
+      window.location.href = '/'
     })
     .catch((err) => console.error(err))
   }
