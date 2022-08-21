@@ -65,7 +65,7 @@ class HomepageLeft extends React.Component{
       return (
         <div className = 'private-home-button'>
           <div className  = 'button-left'>
-            <Link to = '/donate'>Donate</Link>
+            <Link to = '/ngo-companies'>Donate</Link>
           </div>
           <div className  = 'button-right'>
             <Link to = '/'>Learn more</Link>

@@ -78,8 +78,8 @@ export default class Routing extends React.Component{
                 <Profile user = {this.context.user}/>
               </PrivateRoute>
             }/>
-            <Route path = '/donate' element = {
-              <PrivateRoute to = '/donate' login = {this.state.isLoggedIn}>
+            <Route path = '/donate/:ngoId' element = {
+              <PrivateRoute to = '/donate/:ngoId' login = {this.state.isLoggedIn}>
                 <Donate user = {this.context.user}/>
               </PrivateRoute>
             } />
@@ -94,13 +94,18 @@ export default class Routing extends React.Component{
               </PrivateRoute>
             }/>
             <Route path = '/ngo-companies'>
-              <Route path = '/ngo-companies' element = {<NgoList />}/>
+              <Route path = '/ngo-companies' element = {
+                <NavigateParams>
+                  <NgoList />
+                </NavigateParams>
+              }/>
               <Route path = '/ngo-companies/:ngoId' element = {
                 <NavigateParams>
                   <NgoDetail />
                 </NavigateParams>
               } />
             </Route>
+            <Route path = "*" element = {<h1>Not Found</h1> } />
           </Routes>
           <Footer />
         </React.Suspense >
