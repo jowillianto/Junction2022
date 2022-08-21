@@ -38,12 +38,16 @@
 	width 		: 93%;
 	padding 	: 1em 1em;
 	border-radius: 0.5em;
-	border 		: 1px black solid;
+	border 		: 0.2em var(--color1) solid;
 	background-color: white;
 	outline: 0;
 }
 .login-right .login-form input:focus{
 	border 		: 0.2em var(--color1) solid;
+	box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+	outline: 0;
+}
+.login-right .login-form input:hover{
 	box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 	outline: 0;
 }

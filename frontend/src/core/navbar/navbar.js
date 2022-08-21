@@ -42,7 +42,7 @@ export default class Navbar extends React.Component{
       return (
         <div className = 'navbar-right'>
           <div className = 'navbar-right-donate'>
-            <Link to = '/donate'>Donate</Link> 
+            <Link to = '/ngo-companies'>Donate</Link> 
           </div>
           <div className = 'navbar-right-usr-icn'>
             <Link to = '/profile'>

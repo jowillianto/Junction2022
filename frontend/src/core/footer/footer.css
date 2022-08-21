@@ -1,0 +1,16 @@
+.footer{
+	background-image : url('../../assets/footer.png');
+	background-size : cover;
+	height 					: 20em;
+	padding 				: 2em 2em;
+}
+
+.footer .title p{
+  font-size       : 4em;
+  font-weight     : 900;
+  margin          : 0;
+  font-family     : 'ClashGrotesk-Bold';
+	background 			: -webkit-linear-gradient(var(--color6), var(--color4));
+	-webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
