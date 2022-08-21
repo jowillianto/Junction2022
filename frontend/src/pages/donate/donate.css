@@ -1,0 +1,32 @@
+.grid-bg-left{
+	background : 0;
+}
+.grid-cont{
+	padding 	: 0 10%;
+}
+.transaction-up{
+	display 		: flex;
+	flex-flow 	: column wrap;
+}
+
+.transaction-up .donateText, .transaction-down .transactionText{
+	font-weight : 400;
+	font-size 	: 1.2em;	
+}
+.transaction-up .donate >div, .transaction-down .transaction >div{
+	margin-bottom : 2em;
+}
+.transaction-up .donate input{
+	margin-left 	: 1em;
+}
+.transaction-down button {
+	font-size 		: 1em;
+	padding 			: 0.5em 0.5em;
+	width 				: 30vw;
+	border 				: 0.2em var(--color1) solid;	
+	background-color: white;
+}
+.grid-bg-right form>div{
+	margin-bottom: 2em;
+}
+

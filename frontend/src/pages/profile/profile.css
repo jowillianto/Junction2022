@@ -2,7 +2,7 @@
 	display 	: flex;
 	flex-flow : row wrap;
 	justify-content : space-between;
-	padding 	: 0 20%;
+	padding 	: 0 15%;
 }
 .profile-left, .profile-right{
 	display 	: flex;
@@ -25,5 +25,14 @@
 	display 	: flex;
 	flex-flow : row wrap;
 }
-
+.profile-right > div{
+	width 		: 25vw;
+}
+.profile-right .ngo-obj{
+	margin-bottom : 2em;
+}
+.profile-wallet-amount{
+	font-size : 1.2em;
+	font-weight: black;
+}
 
