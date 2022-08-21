@@ -41,7 +41,7 @@ export default class NGOList extends React.Component{
   renderTitle(){
     return(
       <div className = 'ngo-list-title'>
-        <h1>Amet minim mollit non deser</h1>
+        <h1>NGO Lists</h1>
       </div>
     )
   }

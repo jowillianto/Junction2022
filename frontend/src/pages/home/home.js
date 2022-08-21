@@ -12,10 +12,8 @@ class HomepageLeft extends React.Component{
       people_count : 4846, 
       amount       : "$ 1,233,000"
     }
-    this.title  = 'Amet minim mollit non dese'
-    this.desc   = 'Amet minim non deserunt uliamco est sit aliqua\
-    dolor do amet sint . Velit officia consequat duis enim velit\
-     mollit'
+    this.title  = 'Make it Flow Transparently'
+    this.desc   = 'ChaiNGO ensure the transparency of the NGOs to the donors'
   }
   getDonationText(){
     let count = this.state.people_count
@@ -94,7 +92,7 @@ class HomepageRight extends React.Component{
 
       }]
     }
-    this.title  = 'Amet minim mollit non deser'
+    this.title  = 'NGO Lists'
   }
   componentDidMount(){
     NGO.all()
@@ -106,7 +104,7 @@ class HomepageRight extends React.Component{
     return(
       <div className = 'ngo-list'>
         <div className = 'blc-title'>
-          Amet minim mollit non deser
+          NGO Lists
         </div>
         <div className = 'ngo-top'>
           <NGORenderer ngo = {array[0]} />
